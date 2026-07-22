@@ -8,11 +8,15 @@ public class Cyclist
 
     public Measures Measures { get; }
 
+    public Powers Powers { get; }
+
     public Cyclist(
         Guid id,
-        Measures measures) 
+        Measures measures,
+        Powers powers) 
     { 
         Id = id;
         Measures = measures;
+        Powers = powers;
     }
 }
