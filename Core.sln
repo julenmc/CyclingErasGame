@@ -5,11 +5,11 @@ VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Core", "src\CyclingErasGame.Core\CyclingErasGame.Core.csproj", "{11ACA2B3-B4B3-434A-A7B3-C32077873174}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Domain", "src\CyclingErasGame.Core\CyclingErasGame.Domain.csproj", "{11ACA2B3-B4B3-434A-A7B3-C32077873174}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{41D8CDDC-BAD8-4542-8BB9-ABD2873EF6CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Core.Tests", "tests\CyclingErasGame.Core.Tests\CyclingErasGame.Core.Tests.csproj", "{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Domain.Tests", "tests\CyclingErasGame.Core.Tests\CyclingErasGame.Domain.Tests.csproj", "{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
