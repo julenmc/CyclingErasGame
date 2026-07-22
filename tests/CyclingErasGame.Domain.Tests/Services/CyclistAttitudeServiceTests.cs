@@ -1,0 +1,26 @@
+﻿using CyclingErasGame.Domain.Cyclist.Entities.Skills;
+using CyclingErasGame.Domain.Services;
+using static CyclingErasGame.Domain.Cyclist.Entities.Skills.Skill;
+
+namespace CyclingErasGame.Domain.Tests.Services;
+
+public class CyclistAttitudeServiceTests
+{
+    [Theory]
+    [InlineData(SkillLevel.Low, 0.02)]
+    [InlineData(SkillLevel.Medium, 0.03)]
+    [InlineData(SkillLevel.High, 0.05)]
+    public void GetAttackProbability_WithEpicRacerSkill_ReturnsExpected(SkillLevel lvl, double prob)
+    {
+        var service = new CyclistAttitudeService();
+        var cyclist = new Cyclist.Entities.Cyclist(
+            Guid.NewGuid(), 
+            new Cyclist.ValueObjects.Measures(180, 70), 
+            new Cyclist.ValueObjects.Powers(50, 50, 50));
+        cyclist.AddSkill(new EpicRacerSkill(new Guid(), lvl));
+
+        var result = service.GetAttackProbability(cyclist);
+
+        Assert.Equal(prob, result);
+    }
+}

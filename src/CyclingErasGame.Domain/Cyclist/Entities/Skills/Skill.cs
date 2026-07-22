@@ -15,6 +15,7 @@ public abstract class Skill
 
     public enum SkillLevel
     {
+        None,
         Low,
         Medium,
         High
