@@ -1,6 +1,7 @@
 ﻿using CyclingErasGame.Domain.Cyclist.ValueObjects;
 using CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes;
 using CyclingErasGame.Domain.Cyclist.ValueObjects.Skills;
+using static CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes.RacerType;
 
 namespace CyclingErasGame.Domain.Cyclist.Entities;
 
@@ -31,4 +32,9 @@ public class Cyclist
     public void AddSkill(Skill skill) => _skills.Add(skill);
 
     public void AddRacerType(RacerType racerType) => _racerTypes.Add(racerType);
+
+    internal RacerTypeLevel GetLevel<T>() where T : RacerType
+    {
+        return RacerTypes.OfType<T>().FirstOrDefault()?.Level ?? RacerTypeLevel.None;
+    }
 }

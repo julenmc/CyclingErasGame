@@ -13,10 +13,10 @@ public class CyclistAttitudeServiceTests
     public void GetAttackProbability_WithEpicRacerSkill_ReturnsExpected(SkillLevel lvl, double prob)
     {
         var service = new CyclistAttitudeService();
-        var cyclist = new Cyclist.Entities.Cyclist(
+        var cyclist = new Domain.Cyclist.Entities.Cyclist(
             Guid.NewGuid(), 
-            new Cyclist.ValueObjects.Measures(180, 70), 
-            new Cyclist.ValueObjects.Powers(50, 50, 50));
+            new Domain.Cyclist.ValueObjects.Measures(180, 70), 
+            new Domain.Cyclist.ValueObjects.Powers(50, 50, 50));
         cyclist.AddSkill(new EpicRacerSkill(lvl));
 
         var result = service.GetAttackProbability(cyclist);

@@ -19,7 +19,7 @@ public abstract record Skill
         Level = level;
     }
 
-    internal abstract long GetAttackProbability(
+    internal abstract double GetAttackProbability(
         Entities.Cyclist cyclist,
         AttackContext context);
 }

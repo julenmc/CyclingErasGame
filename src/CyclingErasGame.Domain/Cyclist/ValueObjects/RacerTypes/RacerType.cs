@@ -4,6 +4,7 @@ public abstract record RacerType
 {
     public enum RacerTypeLevel
     {
+        None,
         Low,
         Medium, 
         High
