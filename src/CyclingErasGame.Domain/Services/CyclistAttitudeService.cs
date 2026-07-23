@@ -1,4 +1,4 @@
-﻿using CyclingErasGame.Domain.Cyclist.Entities.Skills;
+﻿using CyclingErasGame.Domain.Cyclist.ValueObjects.Skills;
 
 namespace CyclingErasGame.Domain.Services;
 

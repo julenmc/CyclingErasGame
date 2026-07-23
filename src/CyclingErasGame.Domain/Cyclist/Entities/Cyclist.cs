@@ -1,6 +1,6 @@
-﻿using CyclingErasGame.Domain.Cyclist.Entities.RacerTypes;
-using CyclingErasGame.Domain.Cyclist.Entities.Skills;
-using CyclingErasGame.Domain.Cyclist.ValueObjects;
+﻿using CyclingErasGame.Domain.Cyclist.ValueObjects;
+using CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes;
+using CyclingErasGame.Domain.Cyclist.ValueObjects.Skills;
 
 namespace CyclingErasGame.Domain.Cyclist.Entities;
 
