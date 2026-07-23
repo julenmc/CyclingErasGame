@@ -1,4 +1,5 @@
-﻿using CyclingErasGame.Domain.Cyclist.Entities.Skills;
+﻿using CyclingErasGame.Domain.Cyclist.Entities.RacerTypes;
+using CyclingErasGame.Domain.Cyclist.Entities.Skills;
 using CyclingErasGame.Domain.Cyclist.ValueObjects;
 
 namespace CyclingErasGame.Domain.Cyclist.Entities;
@@ -13,6 +14,9 @@ public class Cyclist
 
     private readonly List<Skill> _skills = new();
     public IReadOnlyList<Skill> Skills => _skills;
+
+    private readonly List<RacerType> _racerTypes = new();
+    public IReadOnlyList<RacerType> RacerTypes => _racerTypes;
 
     public Cyclist(
         Guid id,
