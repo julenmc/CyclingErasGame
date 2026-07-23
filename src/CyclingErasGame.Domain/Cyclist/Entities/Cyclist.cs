@@ -29,4 +29,6 @@ public class Cyclist
     }
 
     public void AddSkill(Skill skill) => _skills.Add(skill);
+
+    public void AddRacerType(RacerType racerType) => _racerTypes.Add(racerType);
 }
