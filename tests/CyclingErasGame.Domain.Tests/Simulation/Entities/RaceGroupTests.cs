@@ -1,16 +1,21 @@
-﻿using CyclingErasGame.Domain.Simulation.Entities;
+﻿using CyclingErasGame.Domain.Simulation.Constants;
 using CyclingErasGame.Domain.Tests.Simulation.TestBuilders;
 
 namespace CyclingErasGame.Domain.Tests.Simulation.Entities;
 
 public class RaceGroupTests
 {
-    [Fact]
-    public void Advance_WithNonZeroSpeed_CurrentDistanceIncreases()
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(5.7)]
+    [InlineData(10.34)]
+    [InlineData(26.7)]
+    public void Advance_WithNonZeroSpeed_CurrentDistanceIncreases(double speedMps)
     {
         // Arrange
         var group = RaceGroupBuilder.Default().Build();
-        group.SetSpeed(10);
+        group.SetSpeed(speedMps);
 
         Assert.Equal(0, group.CurrentDistanceKm);
 
@@ -18,6 +23,7 @@ public class RaceGroupTests
         group.Advance();
 
         // Arrange
-        Assert.Equal(0.01, group.CurrentDistanceKm);
+        var expectedDistance = SimulationConstants.AdvancedTimeForTick * speedMps / 1000;
+        Assert.Equal(expectedDistance, group.CurrentDistanceKm);
     }
 }
