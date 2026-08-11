@@ -4,9 +4,10 @@ public class Simulation
 {
     public bool IsFinished { get; private set; }
 
+    public List<RaceGroup> Groups { get; private set; }
+
     private double _raceDistanceKm;
     private IReadOnlyList<Cyclist> _cyclists;
-    private List<RaceGroup> _groups;
 
     public Simulation(
         double raceDistanceKm,
@@ -15,10 +16,10 @@ public class Simulation
     {
         _raceDistanceKm = raceDistanceKm;
         _cyclists = cyclists;
-        _groups = groups.ToList();
+        Groups = groups.ToList();
 
         foreach (var cyclist in _cyclists)
-            cyclist.MoveToGroup(_groups[0]);
+            cyclist.MoveToGroup(Groups[0]);
     }
 
     public void Advance()
@@ -26,20 +27,23 @@ public class Simulation
         UpdateDistances();
     }
 
+    public void UpdateGroupSpeeds(IReadOnlyDictionary<int, double> groupSpeeds)
+    {
+        foreach (var kvp in groupSpeeds)
+        {
+            var group = Groups.FirstOrDefault(g => g.Id == kvp.Key);
+            group?.SetSpeed(kvp.Value);
+        }
+    }
+
     private void UpdateDistances()
     {
-        foreach (var group in _groups)
+        foreach (var group in Groups)
         {
             if (group.CurrentDistanceKm < _raceDistanceKm)
                 group.Advance();
         }
 
-        IsFinished = _groups.All(g => g.CurrentDistanceKm >= _raceDistanceKm);
-    }
-
-    private void UpdateGroupSpeeds()
-    {
-        foreach (var group in _groups)
-            group.SetSpeed(10);
+        IsFinished = Groups.All(g => g.CurrentDistanceKm >= _raceDistanceKm);
     }
 }
