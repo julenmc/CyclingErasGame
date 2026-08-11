@@ -5,8 +5,7 @@ public enum CyclistAttitude
     KeepPosition,
     Attack,
     CounterAttack,
-    Relay,
     Wait,
-    OwnRhythm,
+    SetRhythm,
     FollowWheel
 }
