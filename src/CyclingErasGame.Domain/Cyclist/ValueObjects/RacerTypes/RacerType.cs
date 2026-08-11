@@ -1,9 +1,10 @@
-﻿namespace CyclingErasGame.Domain.Cyclist.Entities.RacerTypes;
+﻿namespace CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes;
 
 public abstract record RacerType
 {
     public enum RacerTypeLevel
     {
+        None,
         Low,
         Medium, 
         High
