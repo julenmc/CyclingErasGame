@@ -16,7 +16,7 @@ public class CyclistAttitudeServiceTests
         var cyclist = new Domain.Cyclist.Entities.Cyclist(
             Guid.NewGuid(), 
             new Domain.Cyclist.ValueObjects.Measures(180, 70), 
-            new Domain.Cyclist.ValueObjects.Powers(50, 50, 50));
+            new Domain.Cyclist.ValueObjects.CyclistPowerValues(50, 50, 50));
         cyclist.AddSkill(new EpicRacerSkill(lvl));
 
         var result = service.GetAttackProbability(cyclist);

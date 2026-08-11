@@ -1,4 +1,5 @@
 ﻿using CyclingErasGame.Domain.Cyclist.ValueObjects;
+using CyclingErasGame.Domain.Cyclist.ValueObjects.Powers;
 using CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes;
 using CyclingErasGame.Domain.Cyclist.ValueObjects.Skills;
 
@@ -7,7 +8,7 @@ namespace CyclingErasGame.Domain.Tests.Cyclist;
 internal class CyclistBuilder
 {
     private Measures _measures = new Measures(180, 70);
-    private Powers _powers = new Powers(50, 50, 50);
+    private CyclistPowerValues _powers = new CyclistPowerValues(50, 50, 50);
     private List<RacerType> _types = new();
     private List<Skill> _skills = new();
 
@@ -17,7 +18,7 @@ internal class CyclistBuilder
         return this;
     }
 
-    internal CyclistBuilder WithPowers(Powers powers)
+    internal CyclistBuilder WithPowers(CyclistPowerValues powers)
     {
         _powers = powers;
         return this;

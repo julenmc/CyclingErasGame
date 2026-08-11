@@ -1,4 +1,5 @@
 ﻿using CyclingErasGame.Domain.Cyclist.ValueObjects;
+using CyclingErasGame.Domain.Cyclist.ValueObjects.Powers;
 using CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes;
 using CyclingErasGame.Domain.Cyclist.ValueObjects.Skills;
 using static CyclingErasGame.Domain.Cyclist.ValueObjects.RacerTypes.RacerType;
@@ -11,7 +12,7 @@ public class Cyclist
 
     public Measures Measures { get; }
 
-    public Powers Powers { get; }
+    public CyclistPowerValues Powers { get; }
 
     private readonly List<Skill> _skills = new();
     public IReadOnlyList<Skill> Skills => _skills;
@@ -22,7 +23,7 @@ public class Cyclist
     public Cyclist(
         Guid id,
         Measures measures,
-        Powers powers) 
+        CyclistPowerValues powers) 
     { 
         Id = id;
         Measures = measures;
