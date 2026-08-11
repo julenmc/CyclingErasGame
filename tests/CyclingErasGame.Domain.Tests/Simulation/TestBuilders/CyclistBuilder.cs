@@ -5,12 +5,12 @@ namespace CyclingErasGame.Domain.Tests.Simulation.TestBuilders;
 
 internal class CyclistBuilder
 {
-    private int _id = 0;
+    private Guid _id = new Guid();
     private RaceGroup _group = RaceGroupBuilder.Default().Build();
     private CyclistAttitude _attitude = CyclistAttitude.KeepPosition;
     private int _effort = 20;
 
-    internal CyclistBuilder WithId(int id)
+    internal CyclistBuilder WithId(Guid id)
     {
         _id = id;
         return this;

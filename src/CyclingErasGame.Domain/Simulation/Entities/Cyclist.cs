@@ -4,7 +4,7 @@ namespace CyclingErasGame.Domain.Simulation.Entities;
 
 public class Cyclist
 {
-    internal int Id { get; }
+    internal Guid Id { get; }
     internal RaceGroup Group { get; private set; }
 
     // Probablemente esto tenga que ir en un VO con actitud, esfuerzo, a quien esperar (opcional), a quién perseguir, qué rueda seguir...
@@ -12,7 +12,7 @@ public class Cyclist
     internal int CurrentEffort { get; private set; }
 
     public Cyclist(
-        int id,
+        Guid id,
         RaceGroup group,
         CyclistAttitude attitude = CyclistAttitude.KeepPosition,
         int currentEffort = 20)
