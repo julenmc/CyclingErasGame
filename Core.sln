@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{41D8CDDC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Domain.Tests", "tests\CyclingErasGame.Domain.Tests\CyclingErasGame.Domain.Tests.csproj", "{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Adapters", "src\CyclingErasGame.Adapters\CyclingErasGame.Adapters.csproj", "{A871E669-DC33-4AEA-BE96-682858A44A9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{11ACA2B3-B4B3-434A-A7B3-C32077873174} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26} = {41D8CDDC-BAD8-4542-8BB9-ABD2873EF6CC}
+		{A871E669-DC33-4AEA-BE96-682858A44A9D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8232C252-30A3-48C6-BD58-675C071DAD2A}
