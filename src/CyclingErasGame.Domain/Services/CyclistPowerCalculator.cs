@@ -3,8 +3,8 @@
 internal class CyclistPowerCalculator
 {
     private const double MaxEffort = 100.0;
-    private const double MediumEffortThreshold = 85.0;
-    private const double LongEffortThreshold = 75.0;
+    private const double MediumEffortThreshold = 80.0;
+    private const double LongEffortThreshold = 60.0;
 
     internal double Calculate(Cyclist.Entities.Cyclist cyclist, Simulation.Entities.Cyclist simulationInfo)
     {

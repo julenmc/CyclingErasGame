@@ -7,19 +7,19 @@ public class CyclistPowerCalculatorTests
 {
     [Theory]
     [InlineData(0, 0)]
-    [InlineData(25, 133)]
-    [InlineData(50, 267)]
-    [InlineData(75, 400)]
-    [InlineData(80, 500)]
-    [InlineData(85, 600)]
-    [InlineData(90, 773)]
-    [InlineData(95, 1090)]
-    [InlineData(100, 1500)]
+    [InlineData(15, 63)]    // Z1
+    [InlineData(30, 125)]   // Z2
+    [InlineData(50, 208)]   // Z3
+    [InlineData(60, 250)]   // Z4
+    [InlineData(70, 300)]   // Z4-5
+    [InlineData(80, 350)]   // Z5
+    [InlineData(85, 419)]   // Z6
+    [InlineData(100, 900)]  // Z7
     public void Calculate_ReturnsCorrectValue(int effort, double expectedPower)
     {
         // Arrange
         var cyclist = Cyclist.CyclistBuilder.Default()
-                                            .WithPowers(new Domain.Cyclist.ValueObjects.Powers.CyclistPowerValues(1500, 600, 400))
+                                            .WithPowers(new Domain.Cyclist.ValueObjects.Powers.CyclistPowerValues(900, 350, 250))
                                             .Build();
         var cyclistSimulation = CyclistBuilder.Default()
                                               .WithId(cyclist.Id)
