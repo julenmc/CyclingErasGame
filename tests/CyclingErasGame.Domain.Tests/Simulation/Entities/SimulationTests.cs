@@ -15,7 +15,7 @@ public class SimulationTests
                                     .Build();
         var cyclists = new List<Domain.Simulation.Entities.Cyclist>
         {
-            CyclistBuilder.Default().WithGroup(group).Build(),
+            SimulationCyclistBuilder.Default().WithGroup(group).Build(),
         };
 
         var simulation = new Domain.Simulation.Entities.Simulation(0.01, cyclists, new List<RaceGroup> { group });
@@ -46,7 +46,7 @@ public class SimulationTests
                                     .Build();
         var cyclists = new List<Domain.Simulation.Entities.Cyclist>
         {
-            CyclistBuilder.Default().WithGroup(group).Build(),
+            SimulationCyclistBuilder.Default().WithGroup(group).Build(),
         };
 
         var simulation = new Domain.Simulation.Entities.Simulation(raceDistanceKm, cyclists, new List<RaceGroup> { group });
@@ -75,7 +75,7 @@ public class SimulationTests
                                     .Build();
         var cyclists = new List<Domain.Simulation.Entities.Cyclist>
         {
-            CyclistBuilder.Default().WithGroup(group).Build(),
+            SimulationCyclistBuilder.Default().WithGroup(group).Build(),
         };
 
         var simulation = new Domain.Simulation.Entities.Simulation(10, cyclists, new List<RaceGroup> { group });
@@ -108,7 +108,7 @@ public class SimulationTests
                                         .WithId(i)
                                         .Build();
             groupList.Add(group);
-            cyclistList.Add(CyclistBuilder.Default().WithGroup(group).Build());
+            cyclistList.Add(SimulationCyclistBuilder.Default().WithGroup(group).Build());
         }
 
         var simulation = new Domain.Simulation.Entities.Simulation(10, cyclistList, groupList);

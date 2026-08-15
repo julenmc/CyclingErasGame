@@ -21,7 +21,7 @@ public class CyclistPowerCalculatorTests
         var cyclist = Cyclist.CyclistBuilder.Default()
                                             .WithPowers(new Domain.Cyclist.ValueObjects.Powers.CyclistPowerValues(900, 350, 250))
                                             .Build();
-        var cyclistSimulation = CyclistBuilder.Default()
+        var cyclistSimulation = SimulationCyclistBuilder.Default()
                                               .WithId(cyclist.Id)
                                               .WithEffort(effort)
                                               .Build();
