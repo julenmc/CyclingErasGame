@@ -1,4 +1,4 @@
-﻿using CyclingErasGame.Domain.Services;
+﻿using CyclingErasGame.Domain.Services.CyclistPowerCalculator;
 using CyclingErasGame.Domain.Tests.Simulation.TestBuilders;
 
 namespace CyclingErasGame.Domain.Tests.Services;
@@ -26,7 +26,7 @@ public class CyclistPowerCalculatorTests
                                               .WithEffort(effort)
                                               .Build();
 
-        var calculator = new CyclistPowerCalculator();
+        var calculator = new CyclistPowerCalculatorService();
 
         // Act
         var result = calculator.Calculate(cyclist, cyclistSimulation);
