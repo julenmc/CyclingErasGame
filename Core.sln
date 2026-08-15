@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Domain.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Adapters", "src\CyclingErasGame.Adapters\CyclingErasGame.Adapters.csproj", "{A871E669-DC33-4AEA-BE96-682858A44A9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Application", "src\CyclingErasGame.Application\CyclingErasGame.Application.csproj", "{F7A30F36-A909-4C78-BF71-B7C7276A25B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclingErasGame.Application.Tests", "tests\CyclingErasGame.Application.Tests\CyclingErasGame.Application.Tests.csproj", "{776CB42F-BB38-49AD-AC4F-14B31DB0D790}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A871E669-DC33-4AEA-BE96-682858A44A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A30F36-A909-4C78-BF71-B7C7276A25B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A30F36-A909-4C78-BF71-B7C7276A25B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A30F36-A909-4C78-BF71-B7C7276A25B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A30F36-A909-4C78-BF71-B7C7276A25B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{776CB42F-BB38-49AD-AC4F-14B31DB0D790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{776CB42F-BB38-49AD-AC4F-14B31DB0D790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{776CB42F-BB38-49AD-AC4F-14B31DB0D790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{776CB42F-BB38-49AD-AC4F-14B31DB0D790}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +51,8 @@ Global
 		{11ACA2B3-B4B3-434A-A7B3-C32077873174} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{62CC9631-5FF8-437F-8D61-E1C7EAF0FA26} = {41D8CDDC-BAD8-4542-8BB9-ABD2873EF6CC}
 		{A871E669-DC33-4AEA-BE96-682858A44A9D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F7A30F36-A909-4C78-BF71-B7C7276A25B1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{776CB42F-BB38-49AD-AC4F-14B31DB0D790} = {41D8CDDC-BAD8-4542-8BB9-ABD2873EF6CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8232C252-30A3-48C6-BD58-675C071DAD2A}
