@@ -1,12 +1,14 @@
-﻿namespace CyclingErasGame.Domain.Services;
+﻿using CyclingErasGame.Domain.Services.CyclistPowerCalculator.CyclistPowerCalculator;
 
-internal class CyclistPowerCalculator
+namespace CyclingErasGame.Domain.Services.CyclistPowerCalculator;
+
+public class CyclistPowerCalculatorService : ICyclistPowerCalculatorService
 {
     private const double MaxEffort = 100.0;
     private const double MediumEffortThreshold = 80.0;
     private const double LongEffortThreshold = 60.0;
 
-    internal double Calculate(Cyclist.Entities.Cyclist cyclist, Simulation.Entities.Cyclist simulationInfo)
+    public double Calculate(Cyclist.Entities.Cyclist cyclist, Simulation.Entities.Cyclist simulationInfo)
     {
         var effort = simulationInfo.CurrentEffort;
         var cyclistPowersFractions = GetPowerFractions(effort);
