@@ -20,7 +20,8 @@ public class Simulation
         Groups = groups.ToList();
 
         foreach (var cyclist in _cyclists)
-            cyclist.MoveToGroup(Groups[0]);
+            if (cyclist.Group == null)
+                cyclist.MoveToGroup(Groups[0]);
     }
 
     public void Advance()
