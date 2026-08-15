@@ -5,6 +5,7 @@ public class Simulation
     public bool IsFinished { get; private set; }
 
     public List<RaceGroup> Groups { get; private set; }
+    public IReadOnlyList<Cyclist> Cyclists => _cyclists;
 
     private double _raceDistanceKm;
     private IReadOnlyList<Cyclist> _cyclists;

@@ -4,8 +4,8 @@ namespace CyclingErasGame.Domain.Simulation.Entities;
 
 public class RaceGroup
 {
-    internal int Id { get; }
-    internal double CurrentDistanceKm { get; private set; } = 0;
+    public int Id { get; }
+    public double CurrentDistanceKm { get; private set; } = 0;
 
     public double SpeedMps { get; private set; }   // Speed in m/s
 

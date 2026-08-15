@@ -4,8 +4,8 @@ namespace CyclingErasGame.Domain.Simulation.Entities;
 
 public class Cyclist
 {
-    internal Guid Id { get; }
-    internal RaceGroup Group { get; private set; }
+    public Guid Id { get; }
+    public RaceGroup Group { get; private set; }
 
     // Probablemente esto tenga que ir en un VO con actitud, esfuerzo, a quien esperar (opcional), a quién perseguir, qué rueda seguir...
     internal CyclistAttitude Attitude { get; private set; }
