@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CyclingErasGame.Domain\CyclingErasGame.Domain.csproj" />
   </ItemGroup>
 
+    <ItemGroup>
+	    <InternalsVisibleTo Include="CyclingErasGame.Application.Tests" />
+    </ItemGroup>
+
 </Project>
