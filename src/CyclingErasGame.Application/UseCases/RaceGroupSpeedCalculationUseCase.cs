@@ -30,29 +30,34 @@ internal class RaceGroupSpeedCalculationUseCase
 
 
         // get relay cyclists' speed
-        var cyclistsInfos = simulation.Cyclists
-            .Where(c => c.Group.Id == 1)
+        var result = new Dictionary<int, double>();
+
+        foreach (var group in simulation.Groups)
+        {
+            var cyclistsInfos = simulation.Cyclists
+            .Where(c => c.Group.Id == group.Id)
             .ToList();
 
-        var ids = new HashSet<Guid>(cyclistsInfos.Select(b => b.Id));
-        var cyclistsInGroup = cyclists
-            .Where(c => ids.Contains(c.Id))
-            .ToList();
+            var ids = new HashSet<Guid>(cyclistsInfos.Select(b => b.Id));
+            var cyclistsInGroup = cyclists
+                .Where(c => ids.Contains(c.Id))
+                .ToList();
 
-        var speed = CalculateGroupSpeed(cyclistsInGroup, cyclistsInfos);
+            // add group speed to dicctionary
+            result.Add(group.Id, CalculateGroupSpeed(group.Id, cyclistsInGroup, cyclistsInfos));
+        }
+
 
         // check if relay stack has to be broken (new max speed)
 
-        // add group speed to dicctionary
+        
 
         // return result
-        return new Dictionary<int, double>
-        {
-            { 1, speed }
-        };
+        return result;
     }
 
     private double CalculateGroupSpeed(
+        int groupId,
         IReadOnlyList<Domain.Cyclist.Entities.Cyclist> cyclistsInGroup,
         IReadOnlyList<Domain.Simulation.Entities.Cyclist> cyclistsSimInfo)
     {

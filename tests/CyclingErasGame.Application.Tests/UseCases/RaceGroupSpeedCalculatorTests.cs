@@ -57,9 +57,9 @@ public class RaceGroupSpeedCalculatorTests
         }
 
         simulation = SimulationBuilder.Default()
-                                          .WithGroups(groups)
-                                          .WithCyclists(simulationCyclists)
-                                          .Build();
+                                      .WithGroups(groups)
+                                      .WithCyclists(simulationCyclists)
+                                      .Build();
     }
 
     #region SpeedProvider
@@ -214,29 +214,34 @@ public class RaceGroupSpeedCalculatorTests
         Assert.Equal(speed, result[1]);
     }
 
-    //[Theory]
-    //[InlineData(2)]
-    //[InlineData(5)]
-    //[InlineData(10)]
-    //public void Calculate_WithMultipleGroupsWithSingleCyclist_ReturnsCorrectSpeed(int groupCount)
-    //{
-    //    // Arrange
-    //    var groupConfigurations = new Dictionary<int, int>();
-    //    for (int i = 0; i < groupCount; i++)
-    //        groupConfigurations.Add(i + 1, 1);
-    //    BuildSimulation(groupConfigurations);
+    [Theory]
+    [InlineData(2)]
+    [InlineData(5)]
+    [InlineData(10)]
+    public void Calculate_WithMultipleGroupsWithSingleCyclist_ReturnsCorrectSpeed(int groupCount)
+    {
+        // Arrange
+        var groupConfigurations = new Dictionary<int, int>();
+        for (int i = 0; i < groupCount; i++)
+            groupConfigurations.Add(i + 1, 1);
+        BuildSimulation(groupConfigurations);
 
-    //    int powerCounter = 0;
-    //    cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(It.IsAny<CyclistEntity>(), It.Is<SimulationCyclist>(c => c.Group.Id)))
-    //                                     .Returns(() => powerCounter)
-    //                                     .Callback(() => powerCounter += 10);
+        double speedCounter = 0;
+        speedProviderMock.Setup(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()))
+                         .Returns(() => speedCounter)
+                         .Callback(() => speedCounter += 10);
 
-    //    // Act
-    //    calculator.Calculate(simulation!, cyclists);
+        // Act
+        var result = calculator.Calculate(simulation!, cyclists);
 
-    //    // Assert
-    //    for (int i = 0; i < groupCount; i++)
-    //        speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), i * 10), Times.Once);
-    //}
+        // Assert
+        Assert.Equal(groupCount, result.Count);
+        for (int i = 0; i < groupCount; i++)
+        {
+            var groupId = i + 1;
+            Assert.Contains(groupId, result.Keys);
+            Assert.Equal(i * 10, result[groupId]);
+        }
+    }
     #endregion
 }
