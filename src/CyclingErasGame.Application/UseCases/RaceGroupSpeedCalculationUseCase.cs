@@ -24,19 +24,13 @@ internal class RaceGroupSpeedCalculationUseCase
         Simulation simulation, 
         IReadOnlyList<Domain.Cyclist.Entities.Cyclist> cyclists)
     {
-        // check attack
-
-        // get cyclist to relay. Empty??
-
-
-        // get relay cyclists' speed
         var result = new Dictionary<int, double>();
 
         foreach (var group in simulation.Groups)
         {
             var cyclistsInfos = simulation.Cyclists
-            .Where(c => c.Group.Id == group.Id)
-            .ToList();
+                .Where(c => c.Group.Id == group.Id)
+                .ToList();
 
             var ids = new HashSet<Guid>(cyclistsInfos.Select(b => b.Id));
             var cyclistsInGroup = cyclists
@@ -44,20 +38,14 @@ internal class RaceGroupSpeedCalculationUseCase
                 .ToList();
 
             // add group speed to dicctionary
-            result.Add(group.Id, CalculateGroupSpeed(group.Id, cyclistsInGroup, cyclistsInfos));
+            result.Add(group.Id, CalculateGroupSpeed(group, cyclistsInGroup, cyclistsInfos));
         }
 
-
-        // check if relay stack has to be broken (new max speed)
-
-        
-
-        // return result
         return result;
     }
 
     private double CalculateGroupSpeed(
-        int groupId,
+        RaceGroup group,
         IReadOnlyList<Domain.Cyclist.Entities.Cyclist> cyclistsInGroup,
         IReadOnlyList<Domain.Simulation.Entities.Cyclist> cyclistsSimInfo)
     {
@@ -72,7 +60,7 @@ internal class RaceGroupSpeedCalculationUseCase
             RiderMassKg = 0,
             GradientPercent = 0.06
         };
-        double speed = 0.0;
+        var speeds = new Dictionary<Guid, double>();
         foreach (var cyclist in cyclistsInGroup)
         {
             var contextForCyclist = baseContext with
@@ -80,9 +68,12 @@ internal class RaceGroupSpeedCalculationUseCase
                 RiderMassKg = cyclist.Measures.WeightKg
             };
             var power = _cyclistPowerCalculator.Calculate(cyclist, cyclistsSimInfo.First(c => c.Id == cyclist.Id));
-            speed = _speedProvider.GetSpeed(contextForCyclist, power);
+            speeds.Add(cyclist.Id, _speedProvider.GetSpeed(contextForCyclist, power));
         }
 
-        return speed;
+        // Relays continue
+        var firstCyclist = group.GetFirstCyclist();
+
+        return speeds[firstCyclist.Id];
     }
 }

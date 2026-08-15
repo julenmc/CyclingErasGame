@@ -34,9 +34,6 @@ public class RaceGroupSpeedCalculatorTests
 
     private void BuildSimulation(Dictionary<int, int> groupsConfiguration)  // Dictionary with group id + group cyclist count
     {
-        cyclists = new List<CyclistEntity>();
-        groups = new List<RaceGroup>();
-        simulationCyclists = new List<SimulationCyclist>();
         foreach (var group in groupsConfiguration)
         {
             var newGroup = RaceGroupBuilder.Default()
@@ -242,6 +239,71 @@ public class RaceGroupSpeedCalculatorTests
             Assert.Contains(groupId, result.Keys);
             Assert.Equal(i * 10, result[groupId]);
         }
+    }
+
+    [Fact]
+    public void Calculate_WithSingleGroupWithMultipleCyclists_ReturnsRelayingCyclistsSpeed()
+    {
+        // The cyclist resting has a theorical speed of 50kph, the cyclist pushing has a 48kph theorical speed
+        // The diff is not enough, so the "slow" one keeps pushing
+
+        // Arrange
+        double fastSpeed = 50;
+        double slowSpeed = 48;
+        var newGroup = RaceGroupBuilder.Default()
+                                       .WithId(1)
+                                       .Build();
+        groups.Add(newGroup);
+
+        // Create "fast" cyclist, the one that should be resting
+        var fastCyclist = CyclistBuilder.Default()
+                                        .Build();
+        var fastCyclistSimInfo = SimulationCyclistBuilder
+            .Default()
+            .WithId(fastCyclist.Id)
+            .WithGroup(newGroup)
+            .WithEffort(50)
+            .Build();
+        cyclists.Add(fastCyclist);
+        simulationCyclists.Add(fastCyclistSimInfo);
+
+        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(fastCyclist, It.IsAny<SimulationCyclist>()))
+                                         .Returns(200);
+        speedProviderMock.Setup(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), 200))
+                         .Returns(() => fastSpeed);
+
+        // Create "slow" cyclist, the one that should be relaying
+        var slowCyclist = CyclistBuilder.Default()
+                                        .Build();
+        var slowCyclistSimInfo = SimulationCyclistBuilder
+            .Default()
+            .WithId(slowCyclist.Id)
+            .WithGroup(newGroup)
+            .WithEffort(48)
+            .Build();
+        cyclists.Add(slowCyclist);
+        simulationCyclists.Add(slowCyclistSimInfo);
+
+        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(slowCyclist, It.IsAny<SimulationCyclist>()))
+                                         .Returns(190);
+        speedProviderMock.Setup(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), 190))
+                         .Returns(() => slowSpeed);
+
+        simulation = SimulationBuilder.Default()
+                                      .WithGroups(groups)
+                                      .WithCyclists(simulationCyclists)
+                                      .Build();
+
+        newGroup.AddCyclistToRelays(slowCyclistSimInfo);
+        newGroup.AddCyclistToRelays(fastCyclistSimInfo);
+
+        // Act
+        var result = calculator.Calculate(simulation!, cyclists);
+
+        // Assert
+        Assert.Single(result);
+        Assert.Contains(1, result.Keys);
+        Assert.Equal(slowSpeed, result[1]);
     }
     #endregion
 }
