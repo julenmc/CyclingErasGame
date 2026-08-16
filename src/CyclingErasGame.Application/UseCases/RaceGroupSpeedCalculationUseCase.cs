@@ -1,21 +1,17 @@
-﻿using CyclingErasGame.Domain.Common.Interfaces.Physics;
-using CyclingErasGame.Domain.Common.ValueObjects;
-using CyclingErasGame.Domain.Services.CyclistPowerCalculator.CyclistPowerCalculator;
+﻿using CyclingErasGame.Domain.Common.ValueObjects;
+using CyclingErasGame.Domain.Services.CyclistSpeedCalculator;
 using CyclingErasGame.Domain.Simulation.Entities;
 
 namespace CyclingErasGame.Application.UseCases;
 
 internal class RaceGroupSpeedCalculationUseCase
 {
-    private readonly ISpeedProvider _speedProvider;
-    private readonly ICyclistPowerCalculatorService _cyclistPowerCalculator;
+    private readonly ICyclistSpeedCalculatorService _speedCalculator;
 
     internal RaceGroupSpeedCalculationUseCase(
-        ISpeedProvider speedProvider,
-        ICyclistPowerCalculatorService cyclistPowerCalculator)
+        ICyclistSpeedCalculatorService speedCalculator)
     {
-        _speedProvider = speedProvider;
-        _cyclistPowerCalculator = cyclistPowerCalculator;
+        _speedCalculator = speedCalculator;
     }
 
     internal IReadOnlyDictionary<int, double> Calculate(
@@ -37,11 +33,8 @@ internal class RaceGroupSpeedCalculationUseCase
                 GradientPercent = 0.06
             };
 
-            var power = _cyclistPowerCalculator.Calculate(cyclist, cyclistSimInfo);
-            var speed = _speedProvider.GetSpeed(context, power);
-
             // add group speed to dicctionary
-            result.Add(group.Id, speed);
+            result.Add(group.Id, _speedCalculator.Calculate(context, cyclist, cyclistSimInfo));
         }
 
         return result;
