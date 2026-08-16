@@ -12,7 +12,7 @@ public class CyclistPowerCalculatorService : ICyclistPowerCalculatorService
 
     public double Calculate(Cyclist.Entities.Cyclist cyclist, Simulation.Entities.Cyclist simulationInfo)
     {
-        if (simulationInfo.Attitude != Simulation.Enums.CyclistAttitude.Attack ||
+        if (simulationInfo.Attitude != Simulation.Enums.CyclistAttitude.Attack &&
             simulationInfo.Attitude != Simulation.Enums.CyclistAttitude.SetRhythm)
             return LowEffort;
         var effort = simulationInfo.CurrentEffort;

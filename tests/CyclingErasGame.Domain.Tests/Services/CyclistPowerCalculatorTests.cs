@@ -24,6 +24,7 @@ public class CyclistPowerCalculatorTests
         var cyclistSimulation = SimulationCyclistBuilder.Default()
                                               .WithId(cyclist.Id)
                                               .WithEffort(effort)
+                                              .WithAttitude(Domain.Simulation.Enums.CyclistAttitude.SetRhythm)
                                               .Build();
 
         var calculator = new CyclistPowerCalculatorService();
