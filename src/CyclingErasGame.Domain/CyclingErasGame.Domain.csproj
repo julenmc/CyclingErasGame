@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="CyclingErasGame.Domain.Tests" />
+		<InternalsVisibleTo Include="CyclingErasGame.Application.Tests" />
 	</ItemGroup>
 
 </Project>

@@ -24,6 +24,7 @@ public class CyclistPowerCalculatorTests
         var cyclistSimulation = SimulationCyclistBuilder.Default()
                                               .WithId(cyclist.Id)
                                               .WithEffort(effort)
+                                              .WithAttitude(Domain.Simulation.Enums.CyclistAttitude.SetRhythm)
                                               .Build();
 
         var calculator = new CyclistPowerCalculatorService();
@@ -33,5 +34,27 @@ public class CyclistPowerCalculatorTests
 
         // Assert
         Assert.Equal(expectedPower, result, 1.0);
+    }
+
+    [Fact]
+    public void Calculate_WithCyclistNotPushing_ReturnsDefaultPower()
+    {
+        // Arrange
+        var cyclist = Cyclist.CyclistBuilder.Default()
+                                            .WithPowers(new Domain.Cyclist.ValueObjects.Powers.CyclistPowerValues(900, 350, 250))
+                                            .Build();
+        var cyclistSimulation = SimulationCyclistBuilder.Default()
+                                              .WithId(cyclist.Id)
+                                              .WithEffort(50)
+                                              .WithAttitude(Domain.Simulation.Enums.CyclistAttitude.KeepPosition)
+                                              .Build();
+
+        var calculator = new CyclistPowerCalculatorService();
+
+        // Act
+        var result = calculator.Calculate(cyclist, cyclistSimulation);
+
+        // Assert
+        Assert.Equal(100, result);
     }
 }

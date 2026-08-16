@@ -8,8 +8,13 @@ public class CyclistPowerCalculatorService : ICyclistPowerCalculatorService
     private const double MediumEffortThreshold = 80.0;
     private const double LongEffortThreshold = 60.0;
 
+    private const double LowEffort = 100;
+
     public double Calculate(Cyclist.Entities.Cyclist cyclist, Simulation.Entities.Cyclist simulationInfo)
     {
+        if (simulationInfo.Attitude != Simulation.Enums.CyclistAttitude.Attack &&
+            simulationInfo.Attitude != Simulation.Enums.CyclistAttitude.SetRhythm)
+            return LowEffort;
         var effort = simulationInfo.CurrentEffort;
         var cyclistPowersFractions = GetPowerFractions(effort);
 
