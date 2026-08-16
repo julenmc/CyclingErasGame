@@ -72,8 +72,9 @@ public class RaceGroupSpeedCalculatorTests
             { 1, 1 }
         };
         BuildSimulation(groupConfigurations);
+        groups[0].AddCyclistToRelays(simulationCyclists[0]);
 
-        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(It.IsAny<CyclistEntity>(), It.IsAny<SimulationCyclist>()))
+        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(cyclists[0], It.IsAny<SimulationCyclist>()))
                                          .Returns(power);
 
         // Act
@@ -95,18 +96,18 @@ public class RaceGroupSpeedCalculatorTests
             { 1, cyclistCount }
         };
         BuildSimulation(groupConfigurations);
+        groups[0].AddCyclistToRelays(simulationCyclists[0]);
 
-        int powerCounter = 0;
-        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(It.IsAny<CyclistEntity>(), It.IsAny<SimulationCyclist>()))
-                                         .Returns(() => powerCounter)
-                                         .Callback(() => powerCounter += 10);
+        int power = 200;
+        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(cyclists[0], It.IsAny<SimulationCyclist>()))
+                                         .Returns(power);
 
         // Act
         calculator.Calculate(simulation!, cyclists);
 
         // Assert
-        for (int i = 0; i < cyclistCount; i++)
-            speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), i * 10), Times.Once);        
+        speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()), Times.Once);    // Called just once, with the first cyclist in group
+        speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), power), Times.Once);        
     }
 
     [Theory]
@@ -120,6 +121,8 @@ public class RaceGroupSpeedCalculatorTests
         for (int i = 0; i < groupCount; i++)
             groupConfigurations.Add(i + 1, 1);
         BuildSimulation(groupConfigurations);
+        for (int i = 0; i < groupCount; i++)
+            groups[i].AddCyclistToRelays(simulationCyclists[i]);
 
         int powerCounter = 0;
         cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(It.IsAny<CyclistEntity>(), It.IsAny<SimulationCyclist>()))
@@ -130,6 +133,7 @@ public class RaceGroupSpeedCalculatorTests
         calculator.Calculate(simulation!, cyclists);
 
         // Assert
+        speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()), Times.Exactly(groupCount));    
         for (int i = 0; i < groupCount; i++)
             speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), i * 10), Times.Once);
     }
@@ -145,6 +149,8 @@ public class RaceGroupSpeedCalculatorTests
         for (int i = 0; i < groupCount; i++)
             groupConfigurations.Add(i + 1, cyclistCount);
         BuildSimulation(groupConfigurations);
+        for (int i = 0; i < groupCount; i++)
+            groups[i].AddCyclistToRelays(simulationCyclists[i * cyclistCount]);
 
         int powerCounter = 0;
         cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(It.IsAny<CyclistEntity>(), It.IsAny<SimulationCyclist>()))
@@ -155,7 +161,8 @@ public class RaceGroupSpeedCalculatorTests
         calculator.Calculate(simulation!, cyclists);
 
         // Assert
-        for (int i = 0; i < groupCount * cyclistCount; i++)
+        speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()), Times.Exactly(groupCount));
+        for (int i = 0; i < groupCount; i++)
             speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), i * 10), Times.Once);
     }
     #endregion
@@ -173,6 +180,7 @@ public class RaceGroupSpeedCalculatorTests
             { 1, 1 }
         };
         BuildSimulation(groupConfigurations);
+        groups[0].AddCyclistToRelays(simulationCyclists[0]);
 
         speedProviderMock.Setup(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()))
                          .Returns(speed);
@@ -198,6 +206,7 @@ public class RaceGroupSpeedCalculatorTests
             { 1, cyclistCount }
         };
         BuildSimulation(groupConfigurations);
+        groups[0].AddCyclistToRelays(simulationCyclists[0]);
 
         speedProviderMock.Setup(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()))
                          .Returns(speed);
@@ -222,6 +231,8 @@ public class RaceGroupSpeedCalculatorTests
         for (int i = 0; i < groupCount; i++)
             groupConfigurations.Add(i + 1, 1);
         BuildSimulation(groupConfigurations);
+        for (int i = 0; i < groupCount; i++)
+            groups[i].AddCyclistToRelays(simulationCyclists[i]);
 
         double speedCounter = 0;
         speedProviderMock.Setup(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), It.IsAny<double>()))
