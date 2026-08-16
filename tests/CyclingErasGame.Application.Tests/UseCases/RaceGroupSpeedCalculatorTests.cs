@@ -1,4 +1,4 @@
-﻿using CyclingErasGame.Application.UseCases;
+﻿using CyclingErasGame.Application.UseCases.RaceGroupSpeedCalculation;
 using CyclingErasGame.Domain.Common.Interfaces.Physics;
 using CyclingErasGame.Domain.Common.ValueObjects;
 using CyclingErasGame.Domain.Services.CyclistPowerCalculator.CyclistPowerCalculator;

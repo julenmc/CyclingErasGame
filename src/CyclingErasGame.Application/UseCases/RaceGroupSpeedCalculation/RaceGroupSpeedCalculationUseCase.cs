@@ -2,9 +2,9 @@
 using CyclingErasGame.Domain.Services.CyclistSpeedCalculator;
 using CyclingErasGame.Domain.Simulation.Entities;
 
-namespace CyclingErasGame.Application.UseCases;
+namespace CyclingErasGame.Application.UseCases.RaceGroupSpeedCalculation;
 
-internal class RaceGroupSpeedCalculationUseCase
+public class RaceGroupSpeedCalculationUseCase : IRaceGroupSpeedCalculation
 {
     private readonly ICyclistSpeedCalculatorService _speedCalculator;
 
@@ -14,7 +14,7 @@ internal class RaceGroupSpeedCalculationUseCase
         _speedCalculator = speedCalculator;
     }
 
-    internal IReadOnlyDictionary<int, double> Calculate(
+    public IReadOnlyDictionary<int, double> Calculate(
         Simulation simulation, 
         IReadOnlyList<Domain.Cyclist.Entities.Cyclist> cyclists)
     {
