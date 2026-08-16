@@ -43,5 +43,5 @@ public class RaceGroup
         }
     }
 
-    public Cyclist GetFirstCyclist() => _relayingCyclists.First();
+    public Cyclist? GetFirstCyclist() => _relayingCyclists.FirstOrDefault();
 }

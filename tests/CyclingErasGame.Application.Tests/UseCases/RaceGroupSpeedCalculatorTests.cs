@@ -165,6 +165,26 @@ public class RaceGroupSpeedCalculatorTests
         for (int i = 0; i < groupCount; i++)
             speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), i * 10), Times.Once);
     }
+
+    [Fact]
+    public void Calculate_WithSingleGroupWithMultipleCyclists_AndNoOneInFront_GivesSpeedProviderCorrectPower()
+    {
+        // Arrange
+        var groupConfigurations = new Dictionary<int, int>
+        {
+            { 1, 3 }
+        };
+        BuildSimulation(groupConfigurations);
+
+        cyclistPowerCalculatorServiceMock.Setup(m => m.Calculate(It.IsAny<CyclistEntity>(), It.Is<SimulationCyclist>(c => c.Attitude == Domain.Simulation.Enums.CyclistAttitude.KeepPosition)))
+                                         .Returns(100);
+
+        // Act
+        calculator.Calculate(simulation!, cyclists);
+
+        // Assert
+        speedProviderMock.Verify(m => m.GetSpeed(It.IsAny<RaceConditionContext>(), 100), Times.Once);
+    }
     #endregion
 
     #region GroupSpeed

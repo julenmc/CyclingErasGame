@@ -27,6 +27,8 @@ internal class RaceGroupSpeedCalculationUseCase
         foreach (var group in simulation.Groups)
         {
             var cyclistSimInfo = group.GetFirstCyclist();
+            if (cyclistSimInfo == null)     // When no cyclist is relaying, get the first one that appears in group
+                cyclistSimInfo = simulation.Cyclists.First(c => c.Group.Id == group.Id);
             var cyclist = cyclists.First(c => c.Id == cyclistSimInfo.Id);
 
             var context = new RaceConditionContext
